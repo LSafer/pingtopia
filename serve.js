@@ -24,9 +24,10 @@ console.log({h: req.headers})
 })
 
 app.get("/", (req, res) => {
+const now = new Date()
     res.status(200)
     	.header("Refresh", POLL_TIMEOUT)
-    	.send(PINGS.join("<br>"))
+    	.send(`NOW: ${now}<br><br>` +  PINGS.join("<br>"))
 })
 
 app.listen(PORT, () => {
