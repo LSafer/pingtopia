@@ -11,7 +11,6 @@ const app = express()
 const PINGS = []
 
 app.post('/ping', (req, res) => {
-console.log({h: req.headers})
     const token = req.headers["authorization"]?.substring(7)
     if (token != TOKEN) return
 
@@ -24,10 +23,11 @@ console.log({h: req.headers})
 })
 
 app.get("/", (req, res) => {
-const now = new Date()
+    const now = new Date()
+
     res.status(200)
     	.header("Refresh", POLL_TIMEOUT)
-    	.send(`NOW: ${now}<br><br>` +  PINGS.join("<br>"))
+    	.send(`NOW: ${now}<br><br>` +  PINGS.slice().reverse().join("<br>"))
 })
 
 app.listen(PORT, () => {
